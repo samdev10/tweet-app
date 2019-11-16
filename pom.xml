@@ -4,11 +4,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
-	
+
 	<properties>
-	<spring.version>2.2.1.RELEASE</spring.version>
-	<spring.security.version>5.2.1.RELEASE</spring.security.version>
-	<project.version>0.0.1</project.version>
+		<spring.version>2.2.1.RELEASE</spring.version>
+		<spring.security.version>5.2.1.RELEASE</spring.security.version>
+		<pmd-maven-plugin.version>3.12.0</pmd-maven-plugin.version>
+		<checkstyle-maven-plugin.version>3.1.0</checkstyle-maven-plugin.version>
+		<project.version>0.0.1</project.version>
 	</properties>
 
 	<parent>
@@ -57,7 +59,7 @@
 				<version>${spring.version}</version>
 			</dependency>
 
-            <!-- test -->
+			<!-- test -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-test</artifactId>
@@ -73,8 +75,26 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>${pmd-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>${checkstyle-maven-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
 	<modules>
 		<module>tweet-app-frontend</module>
 		<module>tweet-app-backend</module>
 	</modules>
+
 </project>
