@@ -27,3 +27,5 @@ nbdist/
 ### React ###
 node_modules
 public
+dist
+node
