@@ -107,8 +107,8 @@
 	</build>
 
 	<modules>
-		<module>tweet-app-frontend</module>
 		<module>tweet-app-backend</module>
+		<module>tweet-app-frontend</module>
 	</modules>
 
 </project>
