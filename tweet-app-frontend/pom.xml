@@ -57,7 +57,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${basedir}/target/classes/public</outputDirectory>
+							<outputDirectory>${project.parent.basedir}/tweet-app-backend/target/classes/static</outputDirectory>
 							<resources>
 								<resource>
 									<directory>${basedir}/dist</directory>
