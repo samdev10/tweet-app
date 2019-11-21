@@ -30,3 +30,4 @@ public
 dist
 node
 *.log
+*.svg
