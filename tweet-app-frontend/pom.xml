@@ -40,6 +40,15 @@
 							<arguments>run-script build</arguments>
 						</configuration>
 					</execution>
+					<execution>
+						<id>test</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>test</arguments>
+						</configuration>
+					</execution>
 				</executions>
 				<configuration>
 					<nodeVersion>v12.4.0</nodeVersion>

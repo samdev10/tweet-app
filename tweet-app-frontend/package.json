@@ -11,7 +11,9 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development --watch",
     "watch": "webpack --watch",
-    "build": "webpack --mode development"
+    "build": "webpack --mode development",
+    "test": "jest",
+    "testWatch": "jest --watch"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,8 +39,11 @@
     "babel-loader": "^8.0.6",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "express": "^4.17.1",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^25.1.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-middleware": "^3.7.2",
