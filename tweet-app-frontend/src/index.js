@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import LoginForm from './components/LoginForm'
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<LoginForm/>, document.getElementById('container'));
