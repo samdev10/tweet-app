@@ -85,6 +85,7 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<configuration>
 					<excludes>**/*Application.java</excludes>
+					<configLocation>src/test/resources/checkstyle.xml</configLocation>
 				</configuration>
 				<executions>
 					<execution>
