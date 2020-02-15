@@ -10,6 +10,10 @@ target/
 .springBeans
 /target/
 
+### Maven ###
+*.pmd
+*.pmdruleset.xml
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
