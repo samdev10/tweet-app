@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import Input from "./Input";
+import Input from "./Input.jsx";
 
 class Form extends Component {
   constructor(props) {
