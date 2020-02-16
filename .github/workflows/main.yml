@@ -13,3 +13,7 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn clean install
+    - name: Install MongoDB from docker
+      run: docker pull mongo:4.0.4, docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.4
+
+      
