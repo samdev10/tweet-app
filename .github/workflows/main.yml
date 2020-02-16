@@ -25,6 +25,13 @@ jobs:
         mongoDBVersion: 3.6
     - name: Build with Maven
       run: mvn clean install
+    - name: Comment Pull Request
+      uses: thollander/actions-comment-pull-request@1.0.0
+      with:
+        # Message that should be printed in the pull request
+        message: 'Github build message'
+        # Github token of the repository (automatically created by Github)
+        GITHUB_TOKEN: 586076608c93d0a7f223f6f7e0d097005649c891
 
 
       
