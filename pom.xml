@@ -11,6 +11,7 @@
 		<pmd-maven-plugin.version>3.12.0</pmd-maven-plugin.version>
 		<checkstyle-maven-plugin.version>3.1.0</checkstyle-maven-plugin.version>
 		<project.version>0.0.1</project.version>
+		<lombok.version>1.18.12</lombok.version>
 	</properties>
 
 	<parent>
@@ -33,16 +34,6 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-				<groupId>com.tweet</groupId>
-				<artifactId>tweet-app-frontend</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.tweet</groupId>
-				<artifactId>tweet-app-backend</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-thymeleaf</artifactId>
 				<version>${spring.version}</version>
@@ -57,7 +48,30 @@
 				<artifactId>spring-boot-starter-security</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
 
+	        <!-- sub modules -->
+			<dependency>
+				<groupId>com.tweet</groupId>
+				<artifactId>tweet-app-frontend</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tweet</groupId>
+				<artifactId>tweet-app-login</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tweet</groupId>
+				<artifactId>tweet-app-backend</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
 			<!-- test -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
@@ -101,6 +115,14 @@
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>3.0.0</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+					<configuration>
+						<release>11</release>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -108,6 +130,7 @@
 	<modules>
 		<module>tweet-app-backend</module>
 		<module>tweet-app-frontend</module>
+		<module>tweet-app-login</module>
 	</modules>
 
 </project>
