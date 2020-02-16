@@ -18,8 +18,11 @@ jobs:
         docker_version: 19.03
         # Docker Channel
         docker_channel: stable
-    - name: Install MongoDB from docker
-      run: docker pull mongo:4.0.4, docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.4
+    - name: Start MongoDB As Docker
+      uses: wbari/start-mongoDB@v0.2
+      with:
+        # MongoDB Version
+        mongoDBVersion: 3.6
     - name: Build with Maven
       run: mvn clean install
 
