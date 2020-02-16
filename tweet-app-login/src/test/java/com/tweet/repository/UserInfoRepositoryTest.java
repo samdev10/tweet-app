@@ -37,8 +37,9 @@ public class UserInfoRepositoryTest {
         sequenceGenerator = new SequenceGeneratorService(mongoTemplate);
         userInfo = UserInfo.builder()
                            .id(sequenceGenerator.generateSequence(SEQUENCE_NAME))
-                .userName("sam")
-                .emailId("sam@me.com")
+                           .userName("sam")
+                           .emailId("sam@me.com")
+                           .password("password")
                            .build();
         uut.save(userInfo);
     }
@@ -56,7 +57,7 @@ public class UserInfoRepositoryTest {
     public void shouldfindUserInfo() {
         // When
         final UserInfo result = uut.findById(userInfo.getId())
-                                         .get();
+                                   .get();
 
         // Then
         assertThat(result).isEqualTo(userInfo);
