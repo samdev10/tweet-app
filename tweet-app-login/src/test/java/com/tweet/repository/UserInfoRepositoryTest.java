@@ -10,23 +10,26 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.tweet.bo.UserInfo;
+import com.tweet.data.config.MongoConfig;
 import com.tweet.utill.SequenceGeneratorService;
 
 @RunWith(SpringRunner.class)
+@EnableMongoRepositories
 @DataMongoTest
-@ComponentScan(basePackages = "com.tweet")
+@ContextConfiguration(classes = MongoConfig.class, initializers = ConfigFileApplicationContextInitializer.class)
 public class UserInfoRepositoryTest {
     @Autowired
     private UserInfoRepository uut;
     @Autowired
     private MongoTemplate mongoTemplate;
     private UserInfo userInfo;
-    private UserInfo userInfo1;
     private SequenceGeneratorService sequenceGenerator;
 
     @Before

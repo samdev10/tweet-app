@@ -13,22 +13,27 @@ import org.springframework.stereotype.Component;
 
 import com.tweet.bo.DatabaseSequence;
 
+/**
+ * Sequence Generator Service.
+ *
+ * */
 @Component
 public class SequenceGeneratorService {
     private final transient MongoTemplate mongoTemplate;
 
     /**
-     * @param mongoTemplate the mongo template.
+     * @param mongoTemplate the mongotemplate.
      */
-    public SequenceGeneratorService(@Autowired final MongoTemplate mongoTemplate) {
+    @Autowired
+    public SequenceGeneratorService(final MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
     /**
-     * @param seqName the sequence name
-     * @return the next sequence number
+     * @param seqName the seqName.
+     * @return the next sequence number.
      */
-    public long generateSequence(final String seqName) {
+    public Long generateSequence(final String seqName) {
         DatabaseSequence counter = mongoTemplate.findAndModify(new Query(where("id").is(seqName)),
                 new Update().inc("seq", 1), FindAndModifyOptions.options()
                                                                 .returnNew(true)
@@ -39,8 +44,6 @@ public class SequenceGeneratorService {
                                       .seq(1L)
                                       .id(seqName)
                                       .build();
-        } else {
-            counter.setSeq(counter.getSeq() + 1);
         }
         mongoTemplate.save(counter);
         return counter.getSeq();
