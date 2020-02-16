@@ -11,6 +11,13 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: setup-docker
+      uses: docker-practice/actions-setup-docker@0.0.1
+      with:
+        # Docker Version
+        docker_version: 19.03
+        # Docker Channel
+        docker_channel: stable
     - name: Install MongoDB from docker
       run: docker pull mongo:4.0.4, docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.4
     - name: Build with Maven
