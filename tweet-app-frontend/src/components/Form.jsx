@@ -67,26 +67,30 @@ class Form extends Component {
   render() {
     const inputs = this.props.inputs.map(
       ({ name, placeholder, type, value, className }, index) => (
-        <Input
-          key={index}
-          name={name}
-          placeholder={placeholder}
-          type={type}
-          value={value}
-          className={type === "submit" ? className : ""}
-          handleError={this.handleError}
-        />
+        <div className="form-group">
+          <Input
+            key={index}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            className={className}
+            handleError={this.handleError}
+          />
+        </div>
       )
     );
     const errors = this.renderError();
     return (
       <form
+        className="form-signin"
         {...this.props}
         onSubmit={this.handleSubmit}
         ref={fm => {
           this.form = fm;
         }}
       >
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         {inputs}
         {errors}
       </form>
