@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import com.tweet.bo.UserInfo;
 import com.tweet.repository.UserInfoRepository;
 
+/**
+ * MongoUserDetailsService.
+ */
 @Component
 public class MongoUserDetailsService implements UserDetailsService {
     @Autowired
@@ -21,6 +24,9 @@ public class MongoUserDetailsService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public User loadUserByUsername(final String username) throws UsernameNotFoundException {
         final UserInfo user = repository.findByUserName(username);

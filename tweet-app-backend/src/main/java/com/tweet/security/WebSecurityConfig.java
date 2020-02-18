@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MongoUserDetailsService userDetailsService;
 
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -45,9 +45,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService((userDetailsService))
+    public void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService)
             .passwordEncoder(passwordEncoder());
     }
 
