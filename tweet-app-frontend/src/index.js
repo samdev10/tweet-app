@@ -1,22 +1,26 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
+import "../src/css/signin.css";
 import Form from "./components/Form.jsx";
 
 const inputs = [
   {
     name: "username",
     placeholder: "username",
-    type: "text"
+    type: "text",
+    className: "form-control"
   },
   {
     name: "password",
     placeholder: "password",
-    type: "password"
+    type: "password",
+    className: "form-control"
   },
   {
     type: "submit",
     value: "Submit",
-    className: "btn"
+    className: "btn btn-lg btn-primary btn-block"
   }
 ];
 
