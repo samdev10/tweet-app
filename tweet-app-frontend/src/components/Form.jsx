@@ -90,7 +90,7 @@ class Form extends Component {
           this.form = fm;
         }}
       >
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
         {inputs}
         {errors}
       </form>

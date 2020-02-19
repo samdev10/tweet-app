@@ -27,7 +27,7 @@ const inputs = [
 const props = {
   name: "loginForm",
   method: "POST",
-  action: "/perform_login",
+  action: "/auth/signin",
   inputs: inputs
 };
 
