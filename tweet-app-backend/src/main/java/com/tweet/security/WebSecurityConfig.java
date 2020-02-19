@@ -3,6 +3,7 @@ package com.tweet.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.tweet.security.jwt.JwtConfigurer;
+import com.tweet.security.jwt.JwtTokenProvider;
 import com.tweet.service.impl.MongoUserDetailsService;
 
 /**
@@ -21,6 +24,14 @@ import com.tweet.service.impl.MongoUserDetailsService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MongoUserDetailsService userDetailsService;
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     /**
      * {@inheritDoc}
@@ -33,13 +44,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/index.js", "/home.js")
             .permitAll()
             .anyRequest()
-            .hasAnyAuthority("USER")
+            .authenticated()
             .and()
             .formLogin()
             .loginPage("/index.html")
             .defaultSuccessUrl("/home.html", true)
-            .loginProcessingUrl("/perform_login")
+            .loginProcessingUrl("/auth/signin")
             .permitAll()
+            .and()
+            .apply(new JwtConfigurer(jwtTokenProvider))
             .and()
             .logout()
             .permitAll();
