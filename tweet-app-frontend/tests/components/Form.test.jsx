@@ -61,7 +61,6 @@ describe("<Form />", () => {
     const wrapper = shallow(<Form {...props} />);
 
     wrapper.update();
-    console.log(wrapper.debug());
     wrapper.find("form").simulate("submit", { value: "1" });
 
     // Then
