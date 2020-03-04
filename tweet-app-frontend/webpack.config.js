@@ -2,14 +2,11 @@ var webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: {
-    index: "./src/index.js",
-    home: "./src/home.js"
-  },
+  entry: "./src/js/index.js",
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader"
@@ -23,14 +20,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      chunks: ["index"],
+      template: "./src/html/index.html",
       filename: "./index.html"
-    }),
-    new HtmlWebpackPlugin({
-      template: "./src/home.html",
-      chunks: ["home"],
-      filename: "./home.html"
     })
   ]
 };
