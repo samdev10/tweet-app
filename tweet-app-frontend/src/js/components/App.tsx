@@ -54,7 +54,6 @@ class App extends React.Component<Props, State> {
       })
       .catch(error => {
         this.setState({ authToken: "", error: error.message });
-        console.log(error);
       });
   };
 
