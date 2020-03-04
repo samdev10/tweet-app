@@ -1,7 +1,13 @@
 package com.tweet.security.jwt;
 
+/**
+ * InvalidJwtAuthenticationException.
+ */
 public class InvalidJwtAuthenticationException extends Exception {
-    public InvalidJwtAuthenticationException(String message) {
+    /**
+     * @param message the error message
+     */
+    public InvalidJwtAuthenticationException(final String message) {
         super(message);
     }
 }

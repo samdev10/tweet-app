@@ -22,21 +22,27 @@ import com.tweet.repository.UserInfoRepository;
 import com.tweet.security.bo.AuthenticationRequest;
 import com.tweet.security.jwt.JwtTokenProvider;
 
+/**
+ * Auth Controller.
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
-    AuthenticationManager authenticationManager;
+    private transient AuthenticationManager authenticationManager;
 
     @Autowired
-    JwtTokenProvider jwtTokenProvider;
+    private transient JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    UserInfoRepository users;
+    private transient UserInfoRepository users;
 
+    /**
+     * @param data the auth request
+     * @return response
+     */
     @PostMapping(value = "/signin", produces = "application/json")
-    public ResponseEntity<Map<Object, String>> signin(@RequestBody AuthenticationRequest data) {
-
+    public ResponseEntity<Map<Object, String>> signin(@RequestBody final AuthenticationRequest data) {
         try {
             String username = data.getUsername();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
@@ -51,8 +57,7 @@ public class AuthController {
             model.put("username", username);
             model.put("token", token);
             return ok(model);
-        }
-        catch (AuthenticationException e) {
+        } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }
     }

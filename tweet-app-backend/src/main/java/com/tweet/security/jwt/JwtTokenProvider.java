@@ -21,25 +21,38 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+/**
+ * JwtTokenProvider.
+ */
 @Component
 public class JwtTokenProvider {
+    private static final int SUB_STRING_LENGTH = 7;
+    private static final int TIMEOUT_IN_SECS = 3600000;
 
     @Value("${security.jwt.token.secret-key:secret}")
     private String secretKey = "secret";
 
-    @Value("${security.jwt.token.expire-length:3600000}")
-    private long validityInMilliseconds = 3600000; // 1h
+    @Value("${security.jwt.token.expire-length:3600000}") // 1h
+    private long validityInMilliseconds = TIMEOUT_IN_SECS;
 
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * init
+     */
     @PostConstruct
     protected void init() {
         secretKey = Base64.getEncoder()
                           .encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String username, List<String> roles) {
+    /**
+     * @param username the username
+     * @param roles the roles
+     * @return a token
+     */
+    public String createToken(final String username, final List<String> roles) {
 
         Claims claims = Jwts.claims()
                             .setSubject(username);
@@ -56,12 +69,20 @@ public class JwtTokenProvider {
                    .compact();
     }
 
-    public Authentication getAuthentication(String token) {
+    /**
+     * @param token the token
+     * @return the authentication
+     */
+    public Authentication getAuthentication(final String token) {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    public String getUsername(String token) {
+    /**
+     * @param token the token
+     * @return the username
+     */
+    public String getUsername(final String token) {
         return Jwts.parser()
                    .setSigningKey(secretKey)
                    .parseClaimsJws(token)
@@ -69,15 +90,24 @@ public class JwtTokenProvider {
                    .getSubject();
     }
 
-    public String resolveToken(HttpServletRequest req) {
+    /**
+     * @param req the request
+     * @return the token
+     */
+    public String resolveToken(final HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7, bearerToken.length());
+            return bearerToken.substring(SUB_STRING_LENGTH, bearerToken.length()); // NOPMD
         }
         return null;
     }
 
-    public boolean validateToken(String token) throws Exception {
+    /**
+     * @param token the token
+     * @return true if the token is valid
+     * @throws Exception
+     */
+    public boolean validateToken(final String token) throws Exception {
         try {
             Jws<Claims> claims = Jwts.parser()
                                      .setSigningKey(secretKey)
@@ -90,8 +120,7 @@ public class JwtTokenProvider {
             }
 
             return true;
-        }
-        catch (JwtException | IllegalArgumentException e) {
+        } catch (JwtException | IllegalArgumentException e) {
             throw new InvalidJwtAuthenticationException("Expired or invalid JWT token");
         }
     }

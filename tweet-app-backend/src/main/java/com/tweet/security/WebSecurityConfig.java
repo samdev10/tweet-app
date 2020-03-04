@@ -24,10 +24,13 @@ import com.tweet.service.impl.MongoUserDetailsService;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private MongoUserDetailsService userDetailsService;
+    private transient MongoUserDetailsService userDetailsService;
     @Autowired
-    JwtTokenProvider jwtTokenProvider;
+    private transient JwtTokenProvider jwtTokenProvider;
 
+    /**
+     * {@inheritDoc}
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
