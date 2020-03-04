@@ -34,8 +34,8 @@ public class AuthController {
     @Autowired
     UserInfoRepository users;
 
-    @PostMapping("/signin")
-    public ResponseEntity<Map<Object, Object>> signin(@RequestBody AuthenticationRequest data) {
+    @PostMapping(value = "/signin", produces = "application/json")
+    public ResponseEntity<Map<Object, String>> signin(@RequestBody AuthenticationRequest data) {
 
         try {
             String username = data.getUsername();
@@ -47,7 +47,7 @@ public class AuthController {
                                                                                                     + "not found"))
                                                                             .getRoles());
 
-            Map<Object, Object> model = new HashMap<>();
+            Map<Object, String> model = new HashMap<>();
             model.put("username", username);
             model.put("token", token);
             return ok(model);
