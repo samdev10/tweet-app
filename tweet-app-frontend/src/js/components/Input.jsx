@@ -17,8 +17,7 @@ class Input extends Component {
   }
 
   render() {
-    const { handleError, ...opts } = this.props;
-    this.handleError = handleError;
+    const { ...opts } = this.props;
     return (
       <input
         {...opts}
@@ -35,8 +34,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   type: PropTypes.string,
   className: PropTypes.string,
-  value: PropTypes.string,
-  handleError: PropTypes.func
+  value: PropTypes.string
 };
 
 export default Input;
