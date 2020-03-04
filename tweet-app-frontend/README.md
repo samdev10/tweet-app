@@ -66,3 +66,17 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### JWT Authentication
+
+Authorization = "Bearer " + token
+Username
+
+
+### Docker mongodb image
+docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.4
+
+### Type Script
+
+npm install --save typescript @types/node @types/react @types/react-dom @types/jest
+

@@ -3,6 +3,8 @@ package com.tweet.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.tweet.security.jwt.JwtConfigurer;
+import com.tweet.security.jwt.JwtTokenProvider;
 import com.tweet.service.impl.MongoUserDetailsService;
 
 /**
@@ -20,29 +24,37 @@ import com.tweet.service.impl.MongoUserDetailsService;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private MongoUserDetailsService userDetailsService;
+    private transient MongoUserDetailsService userDetailsService;
+    @Autowired
+    private transient JwtTokenProvider jwtTokenProvider;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.csrf()
+        http.httpBasic()
+            .disable()
+            .csrf()
             .disable()
             .authorizeRequests()
-            .antMatchers("/index.js", "/home.js")
+            .antMatchers(HttpMethod.GET, "/index*", "/*.js", "/*.json", "/*.ico")
+            .permitAll()
+            .antMatchers("/auth/signin", "/")
             .permitAll()
             .anyRequest()
-            .hasAnyAuthority("USER")
+            .authenticated()
             .and()
-            .formLogin()
-            .loginPage("/index.html")
-            .defaultSuccessUrl("/home.html", true)
-            .loginProcessingUrl("/perform_login")
-            .permitAll()
-            .and()
-            .logout()
-            .permitAll();
+            .apply(new JwtConfigurer(jwtTokenProvider));
     }
 
     /**

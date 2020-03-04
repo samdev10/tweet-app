@@ -1,5 +1,7 @@
 package com.tweet.bo;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -25,4 +27,5 @@ public class UserInfo {
     private String userName;
     private String emailId;
     private String password;
+    private List<String> roles;
 }

@@ -1,6 +1,6 @@
 import { shallow } from "enzyme";
 import React from "react";
-import App from "./App";
+import App from "../../src/js/components/App";
 
 describe("<App />", () => {
   it("will render", () => {
@@ -16,6 +16,6 @@ describe("<App />", () => {
     const wrapper = shallow(<App />);
 
     // Then
-    expect(wrapper.find("h1").text()).toBe("My React App");
+    expect(wrapper.find("h1").text()).toBe("Tweet");
   });
 });
