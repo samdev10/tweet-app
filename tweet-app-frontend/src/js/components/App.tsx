@@ -1,6 +1,6 @@
 import * as React from "react";
-import AuthenticationRequest from "../entities/AuthenticationRequest.ts";
-import Form from "./Form.jsx";
+import AuthenticationRequest from "../entities/AuthenticationRequest";
+import Form from "./Form";
 
 const inputs = [
   {
