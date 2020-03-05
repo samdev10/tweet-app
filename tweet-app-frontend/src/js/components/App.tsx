@@ -30,15 +30,16 @@ const props = {
 interface Props {}
 
 interface State {
-  authToken: string;
+  isAuthenticated: boolean;
   error: string;
 }
 
 class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { authToken: "", error: "" };
+    this.state = { isAuthenticated: false, error: "" };
     this.login = this.login.bind(this);
+    this.getCookie = this.getCookie.bind(this);
   }
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -48,20 +49,32 @@ class App extends React.Component<Props, State> {
     this.login(username, password)
       .then(response => response.json())
       .then(data => {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("username", data.username);
-        this.setState({ authToken: data.token, error: "" });
+        document.cookie = "token=" + data.token;
+        document.cookie = "username=" + data.username;
+        this.setState({ isAuthenticated: true, error: "" });
       })
       .catch(error => {
-        this.setState({ authToken: "", error: error.message });
+        this.setState({ isAuthenticated: false, error: error.message });
       });
   };
 
+  getCookie(name: string) {
+    var cookieArr = document.cookie.split(";");
+
+    for (var i = 0; i < cookieArr.length; i++) {
+      var cookiePair = cookieArr[i].split("=");
+
+      if (name === cookiePair[0].trim()) {
+        return cookiePair[1];
+      }
+    }
+    return null;
+  }
+
   render() {
-    if (
-      window.localStorage.getItem("token") === null ||
-      window.localStorage.getItem("token") === undefined
-    ) {
+    const user = this.getCookie("username");
+    const token = this.getCookie("token");
+    if (token === null || user === null) {
       return (
         <div>
           <h1>Tweet</h1>
@@ -76,7 +89,7 @@ class App extends React.Component<Props, State> {
       return (
         <div>
           <h1>Tweet</h1>
-          <div>Welcome! {window.localStorage.getItem("username")}</div>
+          <div>Welcome! {user}</div>
         </div>
       );
     }
