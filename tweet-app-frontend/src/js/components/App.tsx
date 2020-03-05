@@ -59,11 +59,9 @@ class App extends React.Component<Props, State> {
   };
 
   getCookie(name: string) {
-    var cookieArr = document.cookie.split(";");
-
-    for (var i = 0; i < cookieArr.length; i++) {
-      var cookiePair = cookieArr[i].split("=");
-
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+      var cookiePair = cookies[i].split("=");
       if (name === cookiePair[0].trim()) {
         return cookiePair[1];
       }
