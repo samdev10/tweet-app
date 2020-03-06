@@ -33,7 +33,7 @@ class LoginForm extends Component<Props, State> {
     this.renderInputs = this.renderInputs.bind(this);
   }
 
-  renderError = (): JSX.Element | undefined => {
+  renderError = (): JSX.Element => {
     if (this.props.error) {
       const errmsg = this.props.error;
       return <div className="error">{errmsg}</div>;
