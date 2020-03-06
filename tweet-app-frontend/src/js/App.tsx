@@ -1,32 +1,7 @@
 import * as React from "react";
-import { login, logout } from "../services/AuthService";
-import { getCookie } from "../util/CookiesUtil";
-import Form from "./Form";
-
-const inputs = [
-  {
-    name: "username",
-    placeholder: "username",
-    type: "text",
-    className: "form-control"
-  },
-  {
-    name: "password",
-    placeholder: "password",
-    type: "password",
-    className: "form-control"
-  },
-  {
-    type: "submit",
-    value: "Submit",
-    className: "btn btn-lg btn-primary btn-block"
-  }
-];
-
-const props = {
-  name: "loginForm",
-  inputs: inputs
-};
+import LoginForm from "./components/LoginForm";
+import { login, logout } from "./services/AuthService";
+import { getCookie } from "./util/CookiesUtil";
 
 interface Props {}
 
@@ -40,6 +15,7 @@ class App extends React.Component<Props, State> {
     super(props);
     this.state = { isAuthenticated: false, error: "" };
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
@@ -49,11 +25,10 @@ class App extends React.Component<Props, State> {
       return (
         <div>
           <h1>Tweet</h1>
-          <Form
-            {...props}
-            error={this.state.error}
+          <LoginForm
             handleSubmit={this.handleSubmit}
-          />
+            error={this.state.error}
+          ></LoginForm>
         </div>
       );
     } else {

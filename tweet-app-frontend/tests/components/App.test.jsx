@@ -1,6 +1,6 @@
 import { shallow } from "enzyme";
 import React from "react";
-import App from "../../src/js/components/App";
+import App from "../../src/js/App";
 
 describe("<App />", () => {
   it("will render", () => {
