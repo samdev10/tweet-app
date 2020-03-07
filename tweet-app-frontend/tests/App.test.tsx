@@ -1,6 +1,6 @@
 import { mount, shallow } from "enzyme";
 import React from "react";
-import App from "../../src/js/App";
+import App from "../src/js/App";
 
 describe("<App />", () => {
   const mockCookie = (value: string) => {
