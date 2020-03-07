@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import Input from "./Input.jsx";
+import Input from "./Input";
 
 class Form extends Component {
   renderError = () => {

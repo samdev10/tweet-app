@@ -1,6 +1,7 @@
 import * as React from "react";
-import AuthenticationRequest from "../entities/AuthenticationRequest.ts";
-import Form from "./Form.jsx";
+import { login, logout } from "../services/AuthService";
+import { getCookie } from "../util/CookiesUtil";
+import Form from "./Form";
 
 const inputs = [
   {
@@ -30,38 +31,21 @@ const props = {
 interface Props {}
 
 interface State {
-  authToken: string;
+  isAuthenticated: boolean;
   error: string;
 }
 
 class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { authToken: "", error: "" };
-    this.login = this.login.bind(this);
+    this.state = { isAuthenticated: false, error: "" };
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const username = event.target[0].value;
-    const password = event.target[1].value;
-    this.login(username, password)
-      .then(response => response.json())
-      .then(data => {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("username", data.username);
-        this.setState({ authToken: data.token, error: "" });
-      })
-      .catch(error => {
-        this.setState({ authToken: "", error: error.message });
-      });
-  };
-
   render() {
-    if (
-      window.localStorage.getItem("token") === null ||
-      window.localStorage.getItem("token") === undefined
-    ) {
+    const user = getCookie("username");
+    const token = getCookie("token");
+    if (token === null || user === null) {
       return (
         <div>
           <h1>Tweet</h1>
@@ -76,26 +60,35 @@ class App extends React.Component<Props, State> {
       return (
         <div>
           <h1>Tweet</h1>
-          <div>Welcome! {window.localStorage.getItem("username")}</div>
+          <div>Welcome! {user}</div>
+          <button onClick={this.handleLogout}>logout</button>
         </div>
       );
     }
   }
 
-  private login(username: string, password: string) {
-    return fetch("/auth/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(new AuthenticationRequest(username, password))
-    }).then(response => {
-      if (response.ok) {
-        return Promise.resolve(response);
-      } else {
-        return Promise.reject(new Error("Username and password are invalid"));
-      }
+  handleLogout(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    logout().then(() => {
+      this.setState({ isAuthenticated: false });
     });
   }
+
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const username = event.target[0].value;
+    const password = event.target[1].value;
+    login(username, password)
+      .then(response => response.json())
+      .then(data => {
+        document.cookie = "token=" + data.token;
+        document.cookie = "username=" + data.username;
+        this.setState({ isAuthenticated: true, error: "" });
+      })
+      .catch(error => {
+        this.setState({ isAuthenticated: false, error: error.message });
+      });
+  };
 }
+
 export default App;
