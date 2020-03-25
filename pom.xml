@@ -12,6 +12,7 @@
 		<checkstyle-maven-plugin.version>3.1.0</checkstyle-maven-plugin.version>
 		<project.version>0.0.1</project.version>
 		<lombok.version>1.18.12</lombok.version>
+		<docker.maven.plugin.version>0.33.0</docker.maven.plugin.version>
 	</properties>
 
 	<parent>
@@ -55,7 +56,7 @@
 				<scope>provided</scope>
 			</dependency>
 
-	        <!-- sub modules -->
+			<!-- sub modules -->
 			<dependency>
 				<groupId>com.tweet</groupId>
 				<artifactId>tweet-app-frontend</artifactId>
@@ -71,7 +72,7 @@
 				<artifactId>tweet-app-backend</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
+
 			<!-- test -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
@@ -84,6 +85,13 @@
 				<artifactId>spring-security-test</artifactId>
 				<version>${spring.security.version}</version>
 				<scope>test</scope>
+			</dependency>
+
+			<!-- docker -->
+			<dependency>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker.maven.plugin.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -122,6 +130,11 @@
 					<configuration>
 						<release>11</release>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>io.fabric8</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<version>${docker.maven.plugin.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>

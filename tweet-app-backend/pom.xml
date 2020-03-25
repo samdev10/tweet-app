@@ -74,6 +74,10 @@
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.fabric8</groupId>
+			<artifactId>docker-maven-plugin</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -121,6 +125,51 @@
 					<execution>
 						<goals>
 							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+					<images>
+						<image>
+							<name>tweet-app</name>
+							<build>
+								<from>openjdk:11.0.6</from>
+								<cmd>
+									<shell>java -jar $JAVA_OPTS -Xmx128m -Dserver.port=8000 -Dserver.address=0.0.0.0 /maven/tweet-app-backend-0.0.1.war</shell>
+								</cmd>
+								<assembly>
+									<descriptorRef>artifact</descriptorRef>
+								</assembly>
+							</build>
+							<run>
+								<ports>
+									<port>8000:8000</port>
+								</ports>
+								<links>
+									<link>mongo:db</link>
+								</links>
+							</run>
+						</image>
+					</images>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
 						</goals>
 					</execution>
 				</executions>
