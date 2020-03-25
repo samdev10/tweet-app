@@ -17,7 +17,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.1.RELEASE</version> <!-- lookup parent from repository -->
+		<version>2.2.1.RELEASE</version>
 	</parent>
 	<groupId>com.tweet</groupId>
 	<artifactId>tweet-app</artifactId>
@@ -54,8 +54,7 @@
 				<version>${lombok.version}</version>
 				<scope>provided</scope>
 			</dependency>
-
-	        <!-- sub modules -->
+			<!-- sub modules -->
 			<dependency>
 				<groupId>com.tweet</groupId>
 				<artifactId>tweet-app-frontend</artifactId>
@@ -71,7 +70,6 @@
 				<artifactId>tweet-app-backend</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
 			<!-- test -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
@@ -131,6 +129,6 @@
 		<module>tweet-app-backend</module>
 		<module>tweet-app-frontend</module>
 		<module>tweet-app-login</module>
+		<module>tweet-selenium</module>
 	</modules>
-
 </project>
