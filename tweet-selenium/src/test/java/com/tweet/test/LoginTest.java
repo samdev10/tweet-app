@@ -2,9 +2,9 @@ package com.tweet.test;
 
 import org.testng.annotations.Test;
 
-import com.tweet.AbstractTestNG;
+import com.tweet.AbstractTestNGSelenium;
 
-public class LoginTest extends AbstractTestNG {
+public class LoginTest extends AbstractTestNGSelenium {
     @Test
     public void mustLoginIntoTweetApp() {
         // Given

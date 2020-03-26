@@ -16,7 +16,7 @@ import com.tweet.repository.UserInfoRepository;
 
 @ContextConfiguration(classes = { MongoConfig.class })
 @EnableMongoRepositories(basePackages = "com.tweet.repository")
-public class AbstractTestNG extends AbstractTestNGSpringContextTests {
+public class AbstractTestNGSelenium extends AbstractTestNGSpringContextTests {
     private WebDriver driver;
 
     @Autowired
