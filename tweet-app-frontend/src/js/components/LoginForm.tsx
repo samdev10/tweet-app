@@ -16,6 +16,7 @@ const inputs = [
     className: "form-control"
   },
   {
+    id: "submit",
     type: "submit",
     value: "Submit",
     className: "btn btn-lg btn-primary btn-block"
