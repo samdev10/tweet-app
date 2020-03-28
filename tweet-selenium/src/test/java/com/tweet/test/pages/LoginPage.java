@@ -3,20 +3,22 @@ package com.tweet.test.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.tweet.test.util.TweetAppUser;
+
 public class LoginPage {
     private WebDriver driver;
-    final By password = By.name("password");
-    final By username = By.name("username");
+    final By username = By.id("username");
+    final By password = By.id("password");
 
     public LoginPage(final WebDriver driver) {
         this.driver = driver;
     }
     
-    public HomePage loginAs(final String user, final String pass) {
+    public HomePage loginAs(final TweetAppUser user) {
         driver.findElement(username)
-              .sendKeys(user);
+              .sendKeys(user.getUsername());
         driver.findElement(password)
-              .sendKeys(pass);
+              .sendKeys(user.getPassword());
         return new HomePage(driver);
     }
 }

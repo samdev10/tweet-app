@@ -1,31 +1,24 @@
 package com.tweet.test.login;
 
-import static com.tweet.bo.UserInfo.SEQUENCE_NAME;
+import static com.tweet.test.util.TweetAppUser.PATRON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.testng.annotations.Test;
 
 import com.tweet.AbstractTestNGSelenium;
-import com.tweet.bo.UserInfo;
 import com.tweet.test.pages.HomePage;
 
 public class LoginTest extends AbstractTestNGSelenium {
     @Test
     public void mustLoginIntoTweetApp() {
         // Given
-        final Long sequenceNumber = sequenceGenerator().generateSequence(SEQUENCE_NAME);
-        final UserInfo userInfo = UserInfo.builder()
-                                          .id(sequenceNumber)
-                                          .userName("sam1")
-                                          .password("password")
-                                          .build();
-        userInfoRepository.save(userInfo);
+        createUserInfo(PATRON);
 
         // When
         final HomePage homePage = tweetApp().toLoginPage()
-                  .loginAs("sam1", "password");
+                                            .loginAs(PATRON);
 
-        // Then
-        assertThat(homePage.getHeading()).isEqualTo("Arupu");
+        // Then 
+        assertThat(homePage.getHeading()).isEqualTo("Tweet");
     }
 }
