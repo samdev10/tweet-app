@@ -15,8 +15,7 @@ public class LoginTest extends AbstractTestNGSelenium {
         createUserInfo(PATRON);
 
         // When
-        final HomePage homePage = tweetApp().toLoginPage()
-                                            .loginAs(PATRON);
+        final HomePage homePage = tweetApp().loginAs(PATRON);
 
         // Then 
         assertThat(homePage.getHeading()).isEqualTo("Tweet");
