@@ -44,8 +44,8 @@ public class AbstractTestNGSelenium extends AbstractTestNGSpringContextTests {
         final Long sequenceNumber = sequenceGenerator().generateSequence(SEQUENCE_NAME);
         final UserInfo userInfo = UserInfo.builder()
                                           .id(sequenceNumber)
-                                          .userName("sam1")
-                                          .password("password")
+                                          .userName(user.getUsername())
+                                          .password(user.getPassword())
                                           .build();
         userInfoRepository.save(userInfo);
     }
