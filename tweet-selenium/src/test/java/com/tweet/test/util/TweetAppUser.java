@@ -1,7 +1,7 @@
 package com.tweet.test.util;
 
 public enum TweetAppUser {
-    PATRON("user", "pass");
+    PATRON("user", "pass"), INVALID_USER("invalid", "invalid");
 
     private String username;
     private String password;

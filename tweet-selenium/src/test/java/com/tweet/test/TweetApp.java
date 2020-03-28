@@ -11,6 +11,7 @@ public class TweetApp {
     private String url;
     final By username = By.id("username");
     final By password = By.id("password");
+    final By error = By.className("error");
 
     public TweetApp(final WebDriver driver, final String url) {
         this.driver = driver;
@@ -18,16 +19,34 @@ public class TweetApp {
         driver.get(url);
     }
 
-    public HomePage loginAs(final TweetAppUser user) {
+    public NextPage loginAs(final TweetAppUser user) {
         driver.findElement(username)
               .sendKeys(user.getUsername());
         driver.findElement(password)
               .sendKeys(user.getPassword());
-        return new HomePage(driver);
+        driver.findElement(By.id("submit"))
+              .click();
+        return new NextPage();
+    }
+
+    public class NextPage
+    {
+        public HomePage toHomePage() {
+            return new HomePage(driver);
+        }
+
+        public TweetApp toTweetApp() {
+            return TweetApp.this;
+        }
     }
 
     public void close() {
         driver.close();
+    }
+
+    public String getErrorMessage() {
+        return driver.findElement(error)
+                     .getText();
     }
 
 }
