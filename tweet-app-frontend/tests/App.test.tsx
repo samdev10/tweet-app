@@ -30,7 +30,7 @@ describe("<App />", () => {
         .find("h1")
         .at(0)
         .text()
-    ).toBe("Arupu");
+    ).toBe("Tweet");
   });
 
   it("will render login form", () => {

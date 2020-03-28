@@ -24,7 +24,7 @@ class App extends React.Component<Props, State> {
     if (token === null || user === null) {
       return (
         <div>
-          <h1>Arupu</h1>
+          <h1>Tweet</h1>
           <LoginForm
             handleSubmit={this.handleSubmit}
             error={this.state.error}
@@ -34,7 +34,7 @@ class App extends React.Component<Props, State> {
     } else {
       return (
         <div>
-          <h1>Arupu</h1>
+          <h1>Tweet</h1>
           <div id="welcome">Welcome! {user}</div>
           <button onClick={this.handleLogout}>logout</button>
         </div>

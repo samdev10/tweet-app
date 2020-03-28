@@ -2,12 +2,14 @@ import React, { Component } from "react";
 
 const inputs = [
   {
+    id: "username",
     name: "username",
     placeholder: "username",
     type: "text",
     className: "form-control"
   },
   {
+    id: "password",
     name: "password",
     placeholder: "password",
     type: "password",
@@ -44,9 +46,10 @@ class LoginForm extends Component<Props, State> {
   renderInputs = (): JSX.Element[] => {
     if (inputs) {
       return inputs.map(
-        ({ name, placeholder, type, value, className }, index) => (
+        ({ id, name, placeholder, type, value, className }, index) => (
           <div key={"div" + index} className="form-group">
             <input
+              id={id}
               key={index}
               name={name}
               placeholder={placeholder}
