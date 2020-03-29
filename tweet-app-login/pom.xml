@@ -42,6 +42,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- sub modules -->
+		<dependency>
+			<groupId>com.tweet</groupId>
+			<artifactId>tweet-bo</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

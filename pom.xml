@@ -73,6 +73,11 @@
 				<artifactId>tweet-app-backend</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.tweet</groupId>
+				<artifactId>tweet-bo</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- test -->
 			<dependency>
@@ -144,6 +149,7 @@
 	<modules>
 		<module>tweet-app-backend</module>
 		<module>tweet-app-frontend</module>
+		<module>tweet-bo</module>
 		<module>tweet-app-login</module>
 		<module>tweet-selenium</module>
 	</modules>
