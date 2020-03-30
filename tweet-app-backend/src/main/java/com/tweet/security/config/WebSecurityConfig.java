@@ -1,4 +1,4 @@
-package com.tweet.security;
+package com.tweet.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,9 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.httpBasic()
-            .disable()
-            .csrf()
+        http.csrf()
             .disable()
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/index*", "/*.js", "/*.json", "/*.ico")
