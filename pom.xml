@@ -78,6 +78,11 @@
 				<artifactId>tweet-bo</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.tweet</groupId>
+				<artifactId>tweet-app-redis-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- graphql -->
 			<dependency>
@@ -94,6 +99,19 @@
 				<groupId>com.graphql-java-kickstart</groupId>
 				<artifactId>graphiql-spring-boot-starter</artifactId>
 				<version>7.0.0</version>
+			</dependency>
+
+			<!-- redis -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+				<version>2.2.2.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>3.1.0</version>
+				<type>jar</type>
 			</dependency>
 
 			<!-- test -->
@@ -164,10 +182,11 @@
 	</build>
 
 	<modules>
-		<module>tweet-app-backend</module>
 		<module>tweet-app-frontend</module>
 		<module>tweet-bo</module>
 		<module>tweet-app-login</module>
+		<module>tweet-app-redis-service</module>
+		<module>tweet-app-backend</module>
 		<module>tweet-selenium</module>
 	</modules>
 
