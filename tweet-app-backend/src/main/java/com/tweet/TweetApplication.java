@@ -8,11 +8,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.oembedler.moon.graphql.boot.GraphQLWebsocketAutoConfiguration;
 import com.tweet.configuration.RedisConfiguration;
-import com.tweet.data.config.MongoConfig;
 
 @SpringBootApplication
 @EnableMongoRepositories(basePackages = "com.tweet")
-@Import({ MongoConfig.class, RedisConfiguration.class })
+@Import({ RedisConfiguration.class })
 @EnableAutoConfiguration(exclude = { GraphQLWebsocketAutoConfiguration.class })
 public class TweetApplication {
 
