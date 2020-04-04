@@ -1,4 +1,6 @@
 import * as React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Signup from "../pages/Signup";
 import LoginForm from "./components/LoginForm";
 import { login, logout } from "./services/AuthService";
 import { getCookie } from "./util/CookiesUtil";
@@ -23,13 +25,22 @@ class App extends React.Component<Props, State> {
     const token = getCookie("token");
     if (token === null || user === null) {
       return (
-        <div>
-          <h1>Tweet</h1>
-          <LoginForm
-            handleSubmit={this.handleSubmit}
-            error={this.state.error}
-          ></LoginForm>
-        </div>
+        <BrowserRouter>
+          <div>
+            <Switch>
+              <Route exact path="/">
+                <h1>Tweet</h1>
+                <LoginForm
+                  handleSubmit={this.handleSubmit}
+                  error={this.state.error}
+                ></LoginForm>
+              </Route>
+              <Route exact path="/signup">
+                <Signup />
+              </Route>
+            </Switch>
+          </div>
+        </BrowserRouter>
       );
     } else {
       return (

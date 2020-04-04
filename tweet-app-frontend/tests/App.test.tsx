@@ -1,5 +1,6 @@
 import { mount, shallow } from "enzyme";
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 import App from "../src/js/App";
 
 describe("<App />", () => {
@@ -22,7 +23,11 @@ describe("<App />", () => {
 
   it("will render heading", () => {
     // When
-    const wrapper = mount(<App />);
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/singup"]}>
+        <App />
+      </MemoryRouter>
+    );
 
     // Then
     expect(
@@ -35,7 +40,11 @@ describe("<App />", () => {
 
   it("will render login form", () => {
     // When
-    const wrapper = mount(<App />);
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/singup"]}>
+        <App />
+      </MemoryRouter>
+    );
 
     // Then
     expect(
@@ -51,7 +60,11 @@ describe("<App />", () => {
     mockCookie("token=123; username=sam");
 
     // When
-    const wrapper = mount(<App />);
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/singup"]}>
+        <App />
+      </MemoryRouter>
+    );
 
     // Then
     expect(wrapper.find("#welcome").text()).toBe("Welcome! sam");

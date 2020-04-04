@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/index*", "/*.js", "/*.json", "/*.ico")
             .permitAll()
-            .antMatchers("/auth/signin", "/")
+            .antMatchers("/auth/signin", "/", "/signup")
             .permitAll()
             .antMatchers("/graphql", "/graphiql", "/vendor/**/*.*")
             .permitAll()

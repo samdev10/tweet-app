@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 const inputs = [
   {
@@ -77,6 +78,9 @@ class LoginForm extends Component<Props, State> {
         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
         {inputs}
         {errors}
+        <div>
+          Don't have an account? <Link to="/signup">Singup</Link>
+        </div>
       </form>
     );
   }
