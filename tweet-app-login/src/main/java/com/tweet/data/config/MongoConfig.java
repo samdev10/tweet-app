@@ -16,7 +16,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     @Value("${datasource.client:localhost}")
     private String client;
 
-    @Value("${datasource.database:tweet-app-test}")
+    @Value("${datasource.database:tweet-app}")
     private String databaseName;
 
     /*
@@ -32,14 +32,6 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
      */
     @Override
     public MongoClient mongoClient() {
-        return new MongoClient(client);
-    }
-
-    /*
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getMappingBasePackage() {
-        return "com.tweet";
+        return MongoClients.create("mongodb://" + client + ":27017/?replicaSet=rs0&w=majority");
     }
 }

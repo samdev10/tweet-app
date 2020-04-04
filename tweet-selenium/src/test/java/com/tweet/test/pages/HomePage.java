@@ -5,14 +5,14 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage {
     private WebDriver driver;
-    private By heading = By.tagName("h1");
+    private By welcomeNote = By.id("welcome");
 
     public HomePage(final WebDriver driver) {
         this.driver = driver;
     }
 
     public String getHeading() {
-        return driver.findElement(heading)
+        return driver.findElement(welcomeNote)
                      .getText();
     }
 }

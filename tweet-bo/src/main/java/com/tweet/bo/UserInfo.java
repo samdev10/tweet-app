@@ -1,5 +1,6 @@
 package com.tweet.bo;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Transient;
@@ -24,7 +25,10 @@ public class UserInfo {
     public static final String SEQUENCE_NAME = "users_sequence";
     @MongoId
     private Long id;
+    private String firstName;
+    private String lastName;
     private String userName;
+    private Date dateOfBirth;
     private String emailId;
     private String password;
     private List<String> roles;

@@ -13,15 +13,12 @@ import com.tweet.test.pages.HomePage;
 public class LoginTest extends AbstractTestNGSelenium {
     @Test
     public void mustLoginIntoTweetApp() {
-        // Given
-        createUserInfo(PATRON);
-
         // When
         final HomePage homePage = tweetApp().loginAs(PATRON)
                                             .toHomePage();
 
-        // Then 
-        assertThat(homePage.getHeading()).isEqualTo("Tweet");
+        // Then
+        assertThat(homePage.getHeading()).isEqualTo("Welcome! " + PATRON.getUsername());
     }
 
     @Test
