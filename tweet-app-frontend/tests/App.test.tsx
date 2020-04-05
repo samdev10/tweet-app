@@ -1,17 +1,26 @@
+import { MockedProvider } from "@apollo/react-testing";
+import { waitFor } from "@testing-library/react";
 import { mount, shallow } from "enzyme";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
+import { USER_INFO } from "../src/graphql/UserInfo";
 import App from "../src/js/App";
+import * as CookiesUtil from "../src/js/util/CookiesUtil";
 
+const mocks = [
+  {
+    request: {
+      query: USER_INFO,
+    },
+    result: {
+      data: {
+        getUserInfo: [{ userName: "sam", emailId: "sam" }],
+      },
+    },
+  },
+];
 describe("<App />", () => {
-  const mockCookie = (value: string) => {
-    Object.defineProperty(document, "cookie", {
-      value: value,
-      writable: true
-    });
-  };
-
-  beforeEach(() => mockCookie(""));
+  beforeEach(() => jest.spyOn(CookiesUtil, "getCookie").mockReturnValue(null));
 
   it("will render", () => {
     // When
@@ -30,12 +39,7 @@ describe("<App />", () => {
     );
 
     // Then
-    expect(
-      wrapper
-        .find("h1")
-        .at(0)
-        .text()
-    ).toBe("Tweet");
+    expect(wrapper.find("h1").at(0).text()).toBe("Tweet");
   });
 
   it("will render login form", () => {
@@ -47,26 +51,24 @@ describe("<App />", () => {
     );
 
     // Then
-    expect(
-      wrapper
-        .find("h1")
-        .at(1)
-        .text()
-    ).toBe("Please sign in");
+    expect(wrapper.find("h1").at(1).text()).toBe("Please sign in");
   });
 
-  it("will render user name", () => {
+  it("will render user name", async () => {
     // Given
-    mockCookie("token=123; username=sam");
+    jest.spyOn(CookiesUtil, "getCookie").mockReturnValue("1");
 
     // When
     const wrapper = mount(
-      <MemoryRouter initialEntries={["/singup"]}>
+      <MockedProvider mocks={mocks} addTypename={false}>
         <App />
-      </MemoryRouter>
+      </MockedProvider>
     );
 
     // Then
-    expect(wrapper.find("#welcome").text()).toBe("Welcome! sam");
+    await waitFor(() => {
+      wrapper.update();
+      expect(wrapper.find("#welcome").text()).toBe("Welcome! sam");
+    });
   });
 });
