@@ -13,14 +13,21 @@ import com.tweet.utill.SequenceGeneratorService;
 
 import graphql.kickstart.tools.GraphQLMutationResolver;
 
+/**
+ * User Info Mutation.
+ */
 @Component
 public class UserInfoMutation implements GraphQLMutationResolver {
     @Autowired
-    private UserInfoRepository userRepo;
-    private PasswordEncoder passwordEncoder;
+    private transient UserInfoRepository userRepo;
+    private transient PasswordEncoder passwordEncoder;
     @Autowired
-    protected SequenceGeneratorService sequenceGenerator;
+    private transient SequenceGeneratorService sequenceGenerator;
 
+    /**
+     * @param userInfo the userInfo
+     * @return a userInfo
+     */
     public UserInfo saveUserInfo(final UserInfo userInfo) {
         final Long sequenceNumber = sequenceGenerator.generateSequence(SEQUENCE_NAME);
         passwordEncoder = new BCryptPasswordEncoder();
