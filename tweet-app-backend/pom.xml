@@ -64,10 +64,6 @@
 			<groupId>com.graphql-java-kickstart</groupId>
 			<artifactId>graphql-java-tools</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.graphql-java-kickstart</groupId>
-			<artifactId>graphiql-spring-boot-starter</artifactId>
-		</dependency>
 
 		<!-- sub modules -->
 		<dependency>

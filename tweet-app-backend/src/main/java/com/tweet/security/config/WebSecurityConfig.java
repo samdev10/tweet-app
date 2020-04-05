@@ -49,8 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll()
             .antMatchers("/auth/signin", "/", "/signup")
             .permitAll()
-            .antMatchers("/graphql", "/graphiql", "/vendor/**/*.*")
-            .permitAll()
             .anyRequest()
             .authenticated()
             .and()
