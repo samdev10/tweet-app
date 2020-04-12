@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Query } from "react-apollo";
 import { USER_INFO } from "../../../src/graphql/UserInfo";
+import GetUserInfo from "../entities/GetUserInfo";
 
 interface Props {
   logoutHandler(event: React.MouseEvent<HTMLButtonElement>): void;
@@ -14,23 +15,23 @@ class Home extends Component<Props, State> {
 
   render() {
     return (
-      <Query query={USER_INFO}>
+      <Query<GetUserInfo, {}> query={USER_INFO}>
         {({ loading, error, data }) => {
           if (loading) return <div>Loading...</div>;
-          if (error) return `Error!: ${error}`;
+          if (error) return <div>`Error! ${error.message}`</div>;
 
-          return (
-            <div>
-              <h1>Tweet</h1>
-              <div id="welcome">
-                Welcome!{" "}
-                {data &&
-                  data.getUserInfo.find((user) => user.userName != null)
-                    .userName}
+          if (data?.getUserInfo) {
+            return (
+              <div>
+                <h1>Tweet</h1>
+                <div id="welcome">
+                  Welcome! {data && data.getUserInfo[0].userName}
+                </div>
+                <button onClick={this.props.logoutHandler}>logout</button>
               </div>
-              <button onClick={this.props.logoutHandler}>logout</button>
-            </div>
-          );
+            );
+          }
+          return <></>;
         }}
       </Query>
     );

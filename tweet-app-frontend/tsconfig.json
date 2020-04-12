@@ -3,7 +3,7 @@
   "version": "3.1.6",
   "compilerOptions": {
     "declaration": true,
-    "lib": ["es6","ES2018","dom"],
+    "lib": ["es6","ES2018","dom","es2015"],
     "module": "ESNext",
     "noFallthroughCasesInSwitch": true,
     "jsx": "react", 
@@ -23,6 +23,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
     "removeComments": true,
+    "moduleResolution": "node",
     "plugins": [
       {
         "name": "typescript-tslint-plugin",
