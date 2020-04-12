@@ -1,10 +1,11 @@
+import { ApolloProvider } from "@apollo/react-components";
 import * as React from "react";
-import { Query } from "react-apollo";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { USER_INFO } from "../graphql/UserInfo";
 import Signup from "../pages/Signup";
+import Home from "./components/Home";
 import LoginForm from "./components/LoginForm";
 import { login, logout } from "./services/AuthService";
+import { client } from "./util/ApolloUtil";
 import { getCookie } from "./util/CookiesUtil";
 
 interface Props {}
@@ -27,25 +28,9 @@ class App extends React.Component<Props, State> {
     const token = getCookie("token");
     if (token !== null && user !== null) {
       return (
-        <Query query={USER_INFO}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Loading...</div>;
-            if (error) return `Error!: ${error}`;
-
-            return (
-              <div>
-                <h1>Tweet</h1>
-                <div id="welcome">
-                  Welcome!{" "}
-                  {data &&
-                    data.getUserInfo.find((user) => user.userName != null)
-                      .userName}
-                </div>
-                <button onClick={this.handleLogout}>logout</button>
-              </div>
-            );
-          }}
-        </Query>
+        <ApolloProvider client={client(token)}>
+          <Home logoutHandler={this.handleLogout} />
+        </ApolloProvider>
       );
     }
     return (

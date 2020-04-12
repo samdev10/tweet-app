@@ -1,24 +1,10 @@
-import { MockedProvider } from "@apollo/react-testing";
 import { waitFor } from "@testing-library/react";
 import { mount, shallow } from "enzyme";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
-import { USER_INFO } from "../src/graphql/UserInfo";
 import App from "../src/js/App";
 import * as CookiesUtil from "../src/js/util/CookiesUtil";
 
-const mocks = [
-  {
-    request: {
-      query: USER_INFO,
-    },
-    result: {
-      data: {
-        getUserInfo: [{ userName: "sam", emailId: "sam" }],
-      },
-    },
-  },
-];
 describe("<App />", () => {
   beforeEach(() => jest.spyOn(CookiesUtil, "getCookie").mockReturnValue(null));
 
@@ -54,21 +40,17 @@ describe("<App />", () => {
     expect(wrapper.find("h1").at(1).text()).toBe("Please sign in");
   });
 
-  it("will render user name", async () => {
+  it("will render home page", async () => {
     // Given
     jest.spyOn(CookiesUtil, "getCookie").mockReturnValue("1");
 
     // When
-    const wrapper = mount(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <App />
-      </MockedProvider>
-    );
+    const wrapper = shallow(<App />);
 
     // Then
     await waitFor(() => {
       wrapper.update();
-      expect(wrapper.find("#welcome").text()).toBe("Welcome! sam");
+      expect(wrapper.find("Home").exists()).toBeTruthy();
     });
   });
 });
