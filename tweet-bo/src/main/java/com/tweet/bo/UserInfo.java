@@ -25,11 +25,12 @@ public class UserInfo {
     public static final String SEQUENCE_NAME = "users_sequence";
     @MongoId
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String userName;
+    private String firstname;
+    private String lastname;
+    private String username;
     private Date dateOfBirth;
     private String emailId;
     private String password;
+    private Boolean agreeTerms;
     private List<String> roles;
 }

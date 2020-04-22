@@ -1,20 +1,34 @@
+import * as H from "history";
 import React, { Component } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { signup as register } from "../js/services/AuthService";
 
-interface Props {}
+interface Props extends RouteComponentProps {}
 interface State {}
 
-class Signup extends Component<Props, State> {
+class Signup extends Component<RouteComponentProps, State> {
+  constructor(props: Props) {
+    super(props);
+  }
+
   render() {
     return (
       <>
-        <form className="form-signup" action="/save_user" method="Post">
+        <form
+          className="form-signup"
+          action="/save_user"
+          onSubmit={(e) => {
+            this.handleSubmit(e, this.props.history!);
+          }}
+          method="Post"
+        >
           <div className="form-row">
             <div className="col-md-4 mb-3">
               <label for="validationDefault01">First name</label>
               <input
                 type="text"
                 className="form-control"
-                id="validationDefault01"
+                id="firstname"
                 defaultValue=""
                 placeholder="First name"
                 required
@@ -25,7 +39,7 @@ class Signup extends Component<Props, State> {
               <input
                 type="text"
                 className="form-control"
-                id="validationDefault02"
+                id="lastname"
                 defaultValue=""
                 placeholder="Last name"
                 required
@@ -35,14 +49,14 @@ class Signup extends Component<Props, State> {
               <label for="validationDefaultUsername">Username</label>
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="inputGroupPrepend2">
+                  <span className="input-group-text" id="usernameIcon">
                     @
                   </span>
                 </div>
                 <input
                   type="text"
                   className="form-control"
-                  id="validationDefaultUsername"
+                  id="username"
                   aria-describedby="inputGroupPrepend2"
                   defaultValue=""
                   required
@@ -54,7 +68,7 @@ class Signup extends Component<Props, State> {
               <input
                 type="email"
                 className="form-control"
-                id="validationDefaultEmailid"
+                id="emailId"
                 defaultValue=""
                 placeholder="email"
                 required
@@ -65,7 +79,7 @@ class Signup extends Component<Props, State> {
               <input
                 type="password"
                 className="form-control"
-                id="validationDefaultPassword"
+                id="password"
                 defaultValue=""
                 placeholder="password"
                 required
@@ -78,7 +92,7 @@ class Signup extends Component<Props, State> {
               <input
                 type="password"
                 className="form-control"
-                id="validationDefaultConfirmPassword"
+                id="confirmPassword"
                 defaultValue=""
                 placeholder="Confirm password"
                 required
@@ -90,7 +104,7 @@ class Signup extends Component<Props, State> {
                 className="form-control"
                 type="date"
                 defaultValue=""
-                id="validationDefaultDateOfBirth"
+                id="dateOfBirth"
               />
             </div>
           </div>
@@ -100,8 +114,8 @@ class Signup extends Component<Props, State> {
               <input
                 className="form-check-input"
                 type="checkbox"
-                defaultValue="false"
-                id="invalidCheck2"
+                defaultChecked={false}
+                id="agreeTerms"
                 required
               />
               <label className="form-check-label" for="invalidCheck2">
@@ -116,6 +130,45 @@ class Signup extends Component<Props, State> {
       </>
     );
   }
+
+  private handleSubmit(
+    event: React.FormEvent<HTMLFormElement>,
+    history: H.History
+  ) {
+    event.preventDefault();
+    const firstname = (document?.getElementById(
+      "firstname"
+    ) as HTMLInputElement).value;
+    const lastname = (document?.getElementById("lastname") as HTMLInputElement)
+      .value;
+    const username = (document?.getElementById("username") as HTMLInputElement)
+      .value;
+    const dateOfBirth = (document?.getElementById(
+      "dateOfBirth"
+    ) as HTMLInputElement).value;
+    const emailId = (document?.getElementById("emailId") as HTMLInputElement)
+      .value;
+    const password = (document?.getElementById("password") as HTMLInputElement)
+      .value;
+    const agreeTerms = (document?.getElementById(
+      "agreeTerms"
+    ) as HTMLInputElement).checked;
+    register(
+      firstname,
+      lastname,
+      username,
+      new Date(dateOfBirth + "T24:00:00Z"),
+      password,
+      emailId,
+      agreeTerms
+    )
+      .then(() => {
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
 
-export default Signup;
+export default withRouter(Signup);

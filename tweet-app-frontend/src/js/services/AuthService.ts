@@ -1,4 +1,5 @@
 import AuthenticationRequest from "../entities/AuthenticationRequest";
+import SignupRequest from "../entities/SignupRequest";
 import { getCookie } from "../util/CookiesUtil";
 
 export async function logout(): Promise<Response> {
@@ -6,9 +7,9 @@ export async function logout(): Promise<Response> {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + getCookie("token")
+      Authorization: "Bearer " + getCookie("token"),
     },
-    body: ""
+    body: "",
   });
   if (response.ok) {
     return Promise.resolve(response);
@@ -24,13 +25,46 @@ export async function login(
   const response = await fetch("/auth/signin", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(new AuthenticationRequest(username, password))
+    body: JSON.stringify(new AuthenticationRequest(username, password)),
   });
   if (response.ok) {
     return Promise.resolve(response);
   } else {
     return Promise.reject(new Error("Username and password are invalid"));
+  }
+}
+
+export async function signup(
+  firstname: string,
+  lastname: string,
+  username: string,
+  dateOfBirth: Date,
+  password: string,
+  emailId: string,
+  agreeTerms: boolean
+): Promise<Response> {
+  const response = await fetch("/save_user", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(
+      new SignupRequest(
+        firstname,
+        lastname,
+        username,
+        dateOfBirth,
+        password,
+        emailId,
+        agreeTerms
+      )
+    ),
+  });
+  if (response.ok) {
+    return Promise.resolve(response);
+  } else {
+    return Promise.reject(new Error("Enter valid details"));
   }
 }

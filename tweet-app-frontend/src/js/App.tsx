@@ -45,7 +45,9 @@ class App extends React.Component<Props, State> {
               ></LoginForm>
             </Route>
             <Route exact path="/signup">
-              <Signup />
+              <ApolloProvider client={client("")}>
+                <Signup />
+              </ApolloProvider>
             </Route>
           </Switch>
         </div>

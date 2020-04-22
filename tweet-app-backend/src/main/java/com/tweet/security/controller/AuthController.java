@@ -46,7 +46,7 @@ public class AuthController {
             String username = data.getUsername();
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-            String token = jwtTokenProvider.createToken(username, Optional.of(userRepo.findByUserName(username))
+            String token = jwtTokenProvider.createToken(username, Optional.of(userRepo.findByUsername(username))
                                                                             .orElseThrow(
                                                                                     () -> new UsernameNotFoundException(
                                                                                             "Username " + username

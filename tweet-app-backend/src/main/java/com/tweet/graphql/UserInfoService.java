@@ -5,19 +5,17 @@ import static com.tweet.bo.UserInfo.SEQUENCE_NAME;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.tweet.bo.UserInfo;
 import com.tweet.repository.UserInfoRepository;
 import com.tweet.utill.SequenceGeneratorService;
 
-import graphql.kickstart.tools.GraphQLMutationResolver;
-
 /**
  * User Info Mutation.
  */
-@Component
-public class UserInfoMutation implements GraphQLMutationResolver {
+@Service
+public class UserInfoService {
     @Autowired
     private transient UserInfoRepository userRepo;
     private transient PasswordEncoder passwordEncoder;

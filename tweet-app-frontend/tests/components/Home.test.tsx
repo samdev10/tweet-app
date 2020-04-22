@@ -15,7 +15,7 @@ describe("<Home />", () => {
         data: {
           getUserInfo: [
             {
-              userName: "sam",
+              username: "sam",
               emailId: "sam@gmail.com",
             },
           ],

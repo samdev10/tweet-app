@@ -20,8 +20,8 @@ public class UserInfoResolver implements GraphQLQueryResolver {
      */
     public List<UserInfo> getUserInfo() {
         return asList(UserInfo.builder()
-                                     .userName("sam")
-                                     .emailId("sam@gmail.com")
-                                     .build());
+                              .username("sam")
+                              .emailId("sam@gmail.com")
+                              .build());
     }
 }

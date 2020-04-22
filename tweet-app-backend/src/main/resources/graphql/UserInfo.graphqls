@@ -1,20 +1,9 @@
 type UserInfo {
-    userName: String!
+    username: String!
     emailId: String
-}
-
-input userInfoInput {
-    userName: String!
-    emailId: String
-    password: String!
 }
 
 # The Root Query for the application
 type Query {
     getUserInfo: [UserInfo]!
-}
-
-# The Root Mutation for the application
-type Mutation {
-    saveUserInfo(userInfoInput: userInfoInput!) : UserInfo!
 }

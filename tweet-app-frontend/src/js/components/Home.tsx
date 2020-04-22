@@ -25,7 +25,7 @@ class Home extends Component<Props, State> {
               <div>
                 <h1>Tweet</h1>
                 <div id="welcome">
-                  Welcome! {data && data.getUserInfo[0].userName}
+                  Welcome! {data && data.getUserInfo[0].username}
                 </div>
                 <button onClick={this.props.logoutHandler}>logout</button>
               </div>

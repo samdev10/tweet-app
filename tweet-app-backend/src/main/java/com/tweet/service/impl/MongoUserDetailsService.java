@@ -26,13 +26,13 @@ public class MongoUserDetailsService implements UserDetailsService {
      */
     @Override
     public User loadUserByUsername(final String username) throws UsernameNotFoundException {
-        final UserInfo user = repository.findByUserName(username);
+        final UserInfo user = repository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
 
         final List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("USER"));
-        return new User(user.getUserName(), user.getPassword(), authorities);
+        return new User(user.getUsername(), user.getPassword(), authorities);
     }
 
 }

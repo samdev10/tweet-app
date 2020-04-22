@@ -1,9 +1,9 @@
 class UserInfo {
-  userName: string;
+  username: string;
   emaiId: string;
 
-  constructor(userName: string, emaiId: string) {
-    this.userName = userName;
+  constructor(username: string, emaiId: string) {
+    this.username = username;
     this.emaiId = emaiId;
   }
 }

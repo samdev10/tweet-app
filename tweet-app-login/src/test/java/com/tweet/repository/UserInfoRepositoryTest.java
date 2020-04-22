@@ -35,7 +35,7 @@ public class UserInfoRepositoryTest {
         final Long sequenceNumber = sequenceGenerator.generateSequence(SEQUENCE_NAME);
         userInfo = UserInfo.builder()
                            .id(sequenceNumber)
-                           .userName("sam" + sequenceNumber)
+                           .username("sam" + sequenceNumber)
                            .emailId("sam@me.com")
                            .password("password")
                            .build();
@@ -64,7 +64,7 @@ public class UserInfoRepositoryTest {
     @Test
     public void shouldfindByUserId() {
         // When
-        final UserInfo result = uut.findByUserName(userInfo.getUserName());
+        final UserInfo result = uut.findByUsername(userInfo.getUsername());
 
         // Then
         assertThat(result).isEqualTo(userInfo);
