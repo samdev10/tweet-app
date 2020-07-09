@@ -12,12 +12,13 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import com.tweet.bo.UserInfo;
 import com.tweet.config.TestConfiguration;
 import com.tweet.data.config.MongoConfig;
+import com.tweet.data.config.MongoDevConfig;
 import com.tweet.repository.UserInfoRepository;
 import com.tweet.test.TweetApp;
 import com.tweet.test.util.TweetAppUser;
 import com.tweet.utill.SequenceGeneratorService;
 
-@ContextConfiguration(classes = { MongoConfig.class, TestConfiguration.class })
+@ContextConfiguration(classes = { MongoConfig.class, MongoDevConfig.class, TestConfiguration.class })
 @TestPropertySource("classpath:application-test.properties")
 @EnableMongoRepositories(basePackages = "com.tweet.repository")
 public class AbstractTestNGSelenium extends AbstractTestNGSpringContextTests {
@@ -44,9 +45,9 @@ public class AbstractTestNGSelenium extends AbstractTestNGSpringContextTests {
         final Long sequenceNumber = sequenceGenerator().generateSequence(SEQUENCE_NAME);
         final UserInfo userInfo = UserInfo.builder()
                                           .id(sequenceNumber)
-                                          .userName(user.getUsername())
-                                          .firstName(user.getFirstname())
-                                          .lastName(user.getLastname())
+                                          .username(user.getUsername())
+                                          .firstname(user.getFirstname())
+                                          .lastname(user.getLastname())
                                           .password(user.getPassword())
                                           .emailId(user.getEmailid())
                                           .build();

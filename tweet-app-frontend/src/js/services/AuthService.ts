@@ -40,7 +40,7 @@ export async function signup(
   firstname: string,
   lastname: string,
   username: string,
-  dateOfBirth: Date,
+  dateOfBirth: string,
   password: string,
   emailId: string,
   agreeTerms: boolean

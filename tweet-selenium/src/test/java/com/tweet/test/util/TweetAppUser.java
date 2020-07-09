@@ -1,22 +1,25 @@
 package com.tweet.test.util;
 
 public enum TweetAppUser {
-    PATRON("user", "pass", "firstname", "lastname", "santhoshn.javadeveloper@gmail.com"), INVALID_USER("invalid",
-            "invalid", "", "", "");
+    PATRON("user", "pass", "firstname", "lastname", "santhoshn.javadeveloper@gmail.com",
+            "10/01/1990"), INVALID_USER("invalid",
+                    "invalid", "", "", "", "");
 
     private String username;
     private String password;
     private String firstname;
     private String lastname;
     private String emailid;
+    private String dateOfBirth;
 
     TweetAppUser(final String user, final String pass, final String firstName, final String lastName,
-            final String email) {
+            final String email, final String dateOfBirth) {
         this.username = user;
         this.password = pass;
         this.firstname = firstName;
         this.lastname = lastName;
         this.emailid = email;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getUsername() {
@@ -39,7 +42,7 @@ public enum TweetAppUser {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstname(final String firstname) {
         this.firstname = firstname;
     }
 
@@ -47,7 +50,7 @@ public enum TweetAppUser {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public void setLastname(final String lastname) {
         this.lastname = lastname;
     }
 
@@ -55,9 +58,15 @@ public enum TweetAppUser {
         return emailid;
     }
 
-    public void setEmailid(String emailid) {
+    public void setEmailid(final String emailid) {
         this.emailid = emailid;
     }
-    
-    
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(final String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }

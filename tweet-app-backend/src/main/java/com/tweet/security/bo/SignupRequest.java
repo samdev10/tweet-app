@@ -1,7 +1,6 @@
 package com.tweet.security.bo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +19,7 @@ public class SignupRequest implements Serializable {
     private String firstname;
     private String lastname;
     private String username;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String emailId;
     private String password;
     private Boolean agreeTerms;

@@ -118,12 +118,12 @@ class Signup extends Component<RouteComponentProps, State> {
                 id="agreeTerms"
                 required
               />
-              <label className="form-check-label" for="invalidCheck2">
+              <label className="form-check-label" for="agreeTerms">
                 Agree to terms and conditions
               </label>
             </div>
           </div>
-          <button className="btn btn-primary" type="submit">
+          <button id="signupButton" className="btn btn-primary" type="submit">
             Signup
           </button>
         </form>
@@ -157,7 +157,7 @@ class Signup extends Component<RouteComponentProps, State> {
       firstname,
       lastname,
       username,
-      new Date(dateOfBirth + "T24:00:00Z"),
+      dateOfBirth,
       password,
       emailId,
       agreeTerms

@@ -7,21 +7,21 @@ const inputs = [
     name: "username",
     placeholder: "username",
     type: "text",
-    className: "form-control"
+    className: "form-control",
   },
   {
     id: "password",
     name: "password",
     placeholder: "password",
     type: "password",
-    className: "form-control"
+    className: "form-control",
   },
   {
     id: "submit",
     type: "submit",
     value: "Submit",
-    className: "btn btn-lg btn-primary btn-block"
-  }
+    className: "btn btn-lg btn-primary btn-block",
+  },
 ];
 
 interface Props {
@@ -79,7 +79,10 @@ class LoginForm extends Component<Props, State> {
         {inputs}
         {errors}
         <div>
-          Don't have an account? <Link to="/signup">Singup</Link>
+          Don't have an account?{" "}
+          <Link id="signupLink" to="/signup">
+            Singup
+          </Link>
         </div>
       </form>
     );

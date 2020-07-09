@@ -39,6 +39,11 @@
 			<artifactId>assertj-core</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.awaitility</groupId>
+			<artifactId>awaitility</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- sub modules -->
 		<dependency>
@@ -61,4 +66,12 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<spring.profiles.active>dev</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
 </project>

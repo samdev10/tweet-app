@@ -12,16 +12,16 @@ import com.mongodb.client.MongoClients;
  * Mongo Config.
  */
 @Configuration
-@Profile("!dev")
-public class MongoConfig extends AbstractMongoClientConfiguration {
+@Profile("dev")
+public class MongoDevConfig extends AbstractMongoClientConfiguration {
 
-    @Value("${mongodb.local.database.name:tweet-app}")
+    @Value("${mongodb.database.name:tweet-app}")
     private String databaseName;
 
-    @Value("${mongodb.local.host.name:localhost}")
+    @Value("${mongodb.dev.host.name:localhost}")
     private String host;
 
-    @Value("${mongodb.local.host.port:27017}")
+    @Value("${mongodb.dev.host.port:27017}")
     private String port;
 
     /*

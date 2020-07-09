@@ -134,6 +134,12 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>${docker.maven.plugin.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.awaitility</groupId>
+				<artifactId>awaitility</artifactId>
+				<version>4.0.2</version>
+				<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
