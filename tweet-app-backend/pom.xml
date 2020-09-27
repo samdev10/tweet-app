@@ -136,21 +136,23 @@
 					<images>
 						<image>
 							<name>tweet-app</name>
+							<alias>tweet-app</alias>
 							<build>
 								<from>openjdk:11.0.6</from>
 								<cmd>
-									<shell>java -jar $JAVA_OPTS -Xmx128m -Dserver.port=8000 -Dserver.address=0.0.0.0 /maven/tweet-app-backend-0.0.1.war</shell>
+									<shell>java -jar -Ddatasource.client=mongo /maven/tweet-app-backend-0.0.1.war</shell>
 								</cmd>
 								<assembly>
 									<descriptorRef>artifact</descriptorRef>
 								</assembly>
 							</build>
 							<run>
+								<namingStrategy>alias</namingStrategy>
 								<ports>
-									<port>8000:8000</port>
+									<port>8080:8080</port>
 								</ports>
 								<links>
-									<link>mongo:db</link>
+									<link>mongo:mongo</link>
 								</links>
 							</run>
 						</image>
