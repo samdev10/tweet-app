@@ -18,11 +18,15 @@ jobs:
         docker_version: 19.03
         # Docker Channel
         docker_channel: stable
-    - name: Start MongoDB As Docker
+    - name: Start MongoDB Docker Image 
       uses: wbari/start-mongoDB@v0.2
       with:
         # MongoDB Version
-        mongoDBVersion: 3.6
+        mongoDBVersion: latest
+    - name: Start Redis Docker Image 
+      uses: zhulik/redis-action@1.1.0
+      with:
+        redis version: latest
     - name: Build with Maven
       run: mvn clean install
     - name: Comment Pull Request
