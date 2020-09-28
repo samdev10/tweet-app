@@ -167,7 +167,7 @@
 							<build>
 								<from>openjdk:11.0.6</from>
 								<cmd>
-									<shell>java -jar -Ddatasource.client=mongo /maven/tweet-app-backend-0.0.1.war</shell>
+									<shell>java -jar -Dmongodb.local.host.name=mongo -Dmongodb.dev.host.name=mongo /maven/tweet-app-backend-0.0.1.war</shell>
 								</cmd>
 								<assembly>
 									<descriptorRef>artifact</descriptorRef>
