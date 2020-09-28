@@ -1,16 +1,12 @@
+import { waitFor } from "@testing-library/react";
 import { mount, shallow } from "enzyme";
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 import App from "../src/js/App";
+import * as CookiesUtil from "../src/js/util/CookiesUtil";
 
 describe("<App />", () => {
-  const mockCookie = (value: string) => {
-    Object.defineProperty(document, "cookie", {
-      value: value,
-      writable: true
-    });
-  };
-
-  beforeEach(() => mockCookie(""));
+  beforeEach(() => jest.spyOn(CookiesUtil, "getCookie").mockReturnValue(null));
 
   it("will render", () => {
     // When
@@ -22,38 +18,39 @@ describe("<App />", () => {
 
   it("will render heading", () => {
     // When
-    const wrapper = mount(<App />);
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/singup"]}>
+        <App />
+      </MemoryRouter>
+    );
 
     // Then
-    expect(
-      wrapper
-        .find("h1")
-        .at(0)
-        .text()
-    ).toBe("Arupu");
+    expect(wrapper.find("h1").at(0).text()).toBe("Tweet");
   });
 
   it("will render login form", () => {
     // When
-    const wrapper = mount(<App />);
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/singup"]}>
+        <App />
+      </MemoryRouter>
+    );
 
     // Then
-    expect(
-      wrapper
-        .find("h1")
-        .at(1)
-        .text()
-    ).toBe("Please sign in");
+    expect(wrapper.find("h1").at(1).text()).toBe("Please sign in");
   });
 
-  it("will render user name", () => {
+  it("will render home page", async () => {
     // Given
-    mockCookie("token=123; username=sam");
+    jest.spyOn(CookiesUtil, "getCookie").mockReturnValue("1");
 
     // When
-    const wrapper = mount(<App />);
+    const wrapper = shallow(<App />);
 
     // Then
-    expect(wrapper.find("#welcome").text()).toBe("Welcome! sam");
+    await waitFor(() => {
+      wrapper.update();
+      expect(wrapper.find("Home").exists()).toBeTruthy();
+    });
   });
 });

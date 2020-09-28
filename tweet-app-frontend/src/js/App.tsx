@@ -1,6 +1,11 @@
+import { ApolloProvider } from "@apollo/react-components";
 import * as React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Signup from "../pages/Signup";
+import Home from "./components/Home";
 import LoginForm from "./components/LoginForm";
 import { login, logout } from "./services/AuthService";
+import { client } from "./util/ApolloUtil";
 import { getCookie } from "./util/CookiesUtil";
 
 interface Props {}
@@ -21,25 +26,33 @@ class App extends React.Component<Props, State> {
   render() {
     const user = getCookie("username");
     const token = getCookie("token");
-    if (token === null || user === null) {
+    if (token !== null && user !== null) {
       return (
-        <div>
-          <h1>Arupu</h1>
-          <LoginForm
-            handleSubmit={this.handleSubmit}
-            error={this.state.error}
-          ></LoginForm>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <h1>Arupu</h1>
-          <div id="welcome">Welcome! {user}</div>
-          <button onClick={this.handleLogout}>logout</button>
-        </div>
+        <ApolloProvider client={client(token)}>
+          <Home logoutHandler={this.handleLogout} />
+        </ApolloProvider>
       );
     }
+    return (
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route exact path="/">
+              <h1>Tweet</h1>
+              <LoginForm
+                handleSubmit={this.handleSubmit}
+                error={this.state.error}
+              ></LoginForm>
+            </Route>
+            <Route exact path="/signup">
+              <ApolloProvider client={client("")}>
+                <Signup />
+              </ApolloProvider>
+            </Route>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
   }
 
   handleLogout(event: React.MouseEvent<HTMLButtonElement>) {
@@ -54,13 +67,13 @@ class App extends React.Component<Props, State> {
     const username = event.target[0].value;
     const password = event.target[1].value;
     login(username, password)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         document.cookie = "token=" + data.token;
         document.cookie = "username=" + data.username;
         this.setState({ isAuthenticated: true, error: "" });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ isAuthenticated: false, error: error.message });
       });
   };

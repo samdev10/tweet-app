@@ -1,23 +1,27 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 const inputs = [
   {
+    id: "username",
     name: "username",
     placeholder: "username",
     type: "text",
-    className: "form-control"
+    className: "form-control",
   },
   {
+    id: "password",
     name: "password",
     placeholder: "password",
     type: "password",
-    className: "form-control"
+    className: "form-control",
   },
   {
+    id: "submit",
     type: "submit",
     value: "Submit",
-    className: "btn btn-lg btn-primary btn-block"
-  }
+    className: "btn btn-lg btn-primary btn-block",
+  },
 ];
 
 interface Props {
@@ -44,9 +48,10 @@ class LoginForm extends Component<Props, State> {
   renderInputs = (): JSX.Element[] => {
     if (inputs) {
       return inputs.map(
-        ({ name, placeholder, type, value, className }, index) => (
+        ({ id, name, placeholder, type, value, className }, index) => (
           <div key={"div" + index} className="form-group">
             <input
+              id={id}
               key={index}
               name={name}
               placeholder={placeholder}
@@ -73,6 +78,12 @@ class LoginForm extends Component<Props, State> {
         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
         {inputs}
         {errors}
+        <div>
+          Don't have an account?{" "}
+          <Link id="signupLink" to="/signup">
+            Singup
+          </Link>
+        </div>
       </form>
     );
   }

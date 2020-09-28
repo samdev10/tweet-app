@@ -2,21 +2,27 @@ package com.tweet.data.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 
 /**
  * Mongo Config.
  */
 @Configuration
-public class MongoConfig extends AbstractMongoConfiguration {
+@Profile("!dev")
+public class MongoConfig extends AbstractMongoClientConfiguration {
 
-    @Value("${datasource.client:localhost}")
-    private String client;
-
-    @Value("${datasource.database:tweet-app}")
+    @Value("${mongodb.local.database.name:tweet-app}")
     private String databaseName;
+
+    @Value("${mongodb.local.host.name:localhost}")
+    private String host;
+
+    @Value("${mongodb.local.host.port:27017}")
+    private String port;
 
     /*
      * {@inheritDoc}
@@ -31,14 +37,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
      */
     @Override
     public MongoClient mongoClient() {
-        return new MongoClient(client);
+        return MongoClients.create("mongodb://" + host + ":" + port + "/");
     }
 
-    /*
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getMappingBasePackage() {
-        return "com.tweet";
-    }
 }

@@ -1,11 +1,16 @@
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 import LoginForm from "../../src/js/components/LoginForm";
 
 describe("<LoginForm />", () => {
   it("will render", () => {
     // When
-    const wrapper = shallow(<LoginForm handleSubmit={() => {}} error="" />);
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/singup"]}>
+        <LoginForm handleSubmit={() => {}} error="" />
+      </MemoryRouter>
+    );
 
     // Then
     expect(wrapper.exists()).toBeTruthy();
@@ -16,8 +21,10 @@ describe("<LoginForm />", () => {
     let errmsg = "error";
 
     // When
-    const wrapper = shallow(
-      <LoginForm handleSubmit={() => {}} error={errmsg} />
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/singup"]}>
+        <LoginForm handleSubmit={() => {}} error={errmsg} />
+      </MemoryRouter>
     );
 
     // Then
@@ -26,7 +33,11 @@ describe("<LoginForm />", () => {
 
   it("will render inputs", () => {
     // When
-    const wrapper = shallow(<LoginForm handleSubmit={() => {}} error="" />);
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/singup"]}>
+        <LoginForm handleSubmit={() => {}} error="" />
+      </MemoryRouter>
+    );
 
     // Then
     expect(
@@ -55,7 +66,11 @@ describe("<LoginForm />", () => {
     const stub = () => {
       isCalled = true;
     };
-    const wrapper = shallow(<LoginForm handleSubmit={stub} error="" />);
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/singup"]}>
+        <LoginForm handleSubmit={stub} error="" />
+      </MemoryRouter>
+    );
 
     // When
     wrapper.find("form").simulate("submit");

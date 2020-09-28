@@ -1,0 +1,9 @@
+type UserInfo {
+    username: String!
+    emailId: String
+}
+
+# The Root Query for the application
+type Query {
+    getUserInfo: [UserInfo]!
+}

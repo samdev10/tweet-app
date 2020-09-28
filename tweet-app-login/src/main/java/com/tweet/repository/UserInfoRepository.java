@@ -12,5 +12,5 @@ public interface UserInfoRepository extends MongoRepository<UserInfo, Long> {
      * @param userName the userName.
      * @return the user information.
      */
-    UserInfo findByUserName(String userName);
+    UserInfo findByUsername(String username);
 }; // NOPMD

@@ -30,12 +30,11 @@ import com.tweet.security.jwt.JwtTokenProvider;
 public class AuthController {
     @Autowired
     private transient AuthenticationManager authenticationManager;
-
     @Autowired
     private transient JwtTokenProvider jwtTokenProvider;
-
     @Autowired
-    private transient UserInfoRepository users;
+    private transient UserInfoRepository userRepo;
+
 
     /**
      * @param data the auth request
@@ -45,8 +44,9 @@ public class AuthController {
     public ResponseEntity<Map<Object, String>> signin(@RequestBody final AuthenticationRequest data) {
         try {
             String username = data.getUsername();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-            String token = jwtTokenProvider.createToken(username, Optional.of(this.users.findByUserName(username))
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(username, data.getPassword()));
+            String token = jwtTokenProvider.createToken(username, Optional.of(userRepo.findByUsername(username))
                                                                             .orElseThrow(
                                                                                     () -> new UsernameNotFoundException(
                                                                                             "Username " + username
