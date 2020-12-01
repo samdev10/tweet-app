@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Query } from "react-apollo";
-import { USER_INFO } from "../../../src/graphql/UserInfo";
+import { GET_USER_INFO } from "../../graphql/GetUserInfo";
 import GetUserInfo from "../entities/GetUserInfo";
 
 interface Props {
@@ -15,7 +15,10 @@ class Home extends Component<Props, State> {
 
   render() {
     return (
-      <Query<GetUserInfo, {}> query={USER_INFO}>
+      <Query<GetUserInfo>
+        query={GET_USER_INFO}
+        variables={{ username: "user" }}
+      >
         {({ loading, error, data }) => {
           if (loading) return <div>Loading...</div>;
           if (error) return <div>`Error! ${error.message}`</div>;
@@ -25,9 +28,11 @@ class Home extends Component<Props, State> {
               <div>
                 <h1>Tweet</h1>
                 <div id="welcome">
-                  Welcome! {data && data.getUserInfo[0].username}
+                  Welcome! {data && data.getUserInfo.username}
                 </div>
-                <button onClick={this.props.logoutHandler}>logout</button>
+                <button id="logout" onClick={this.props.logoutHandler}>
+                  logout
+                </button>
               </div>
             );
           }

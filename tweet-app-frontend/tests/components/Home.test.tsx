@@ -2,29 +2,28 @@ import { MockedProvider } from "@apollo/react-testing";
 import { waitFor } from "@testing-library/react";
 import { mount } from "enzyme";
 import React from "react";
-import { USER_INFO } from "../../src/graphql/UserInfo";
+import { GET_USER_INFO } from "../../src/graphql/GetUserInfo";
 import Home from "../../src/js/components/Home";
 
 describe("<Home />", () => {
   const mocks = [
     {
       request: {
-        query: USER_INFO,
+        query: GET_USER_INFO,
+        variables: { username: "user" },
       },
       result: {
         data: {
-          getUserInfo: [
-            {
-              username: "sam",
-              emailId: "sam@gmail.com",
-            },
-          ],
+          getUserInfo: {
+            username: "sam",
+            emailId: "sam@gmail.com",
+          },
         },
       },
     },
   ];
 
-  it.only("will render welcome note", async () => {
+  it("will render welcome note", async () => {
     // When
     const wrapper = mount(
       <MockedProvider mocks={mocks} addTypename={false}>
