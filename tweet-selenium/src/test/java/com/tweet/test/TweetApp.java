@@ -71,4 +71,7 @@ public class TweetApp {
                      .getText();
     }
 
+    public void logout() {
+        driver.get(url + "/signout");
+    }
 }

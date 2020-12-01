@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.BeforeMethod;
 
 import com.tweet.bo.UserInfo;
 import com.tweet.config.TestConfiguration;
@@ -52,5 +53,10 @@ public class AbstractTestNGSelenium extends AbstractTestNGSpringContextTests {
                                           .emailId(user.getEmailid())
                                           .build();
         userInfoRepository.save(userInfo);
+    }
+
+    @BeforeMethod
+    public void before() {
+        tweetApp.logout();
     }
 }

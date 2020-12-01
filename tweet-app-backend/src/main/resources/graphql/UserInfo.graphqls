@@ -1,9 +1,14 @@
 type UserInfo {
     username: String!
-    emailId: String
+    emailId: String!
 }
 
-# The Root Query for the application
+# User Info Criteria
+input UserInfoCriteria {
+    username: String
+}
+
+# Obtain User Info Service
 type Query {
-    getUserInfo: [UserInfo]!
+    getUserInfo(username : String): UserInfo
 }

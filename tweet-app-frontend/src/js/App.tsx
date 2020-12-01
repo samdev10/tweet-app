@@ -37,7 +37,7 @@ class App extends React.Component<Props, State> {
       <BrowserRouter>
         <div>
           <Switch>
-            <Route exact path="/">
+            <Route exact path={["/", "/signout"]}>
               <h1>Tweet</h1>
               <LoginForm
                 handleSubmit={this.handleSubmit}
