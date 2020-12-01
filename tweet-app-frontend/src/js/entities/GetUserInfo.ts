@@ -1,9 +1,9 @@
 import UserInfo from "./UserInfo";
 
 class GetUserInfo {
-  getUserInfo: UserInfo[];
+  getUserInfo: UserInfo;
 
-  constructor(getUserInfo: UserInfo[]) {
+  constructor(getUserInfo: UserInfo) {
     this.getUserInfo = getUserInfo;
   }
 }
