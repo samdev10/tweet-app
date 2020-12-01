@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: setup-java
-      uses: olafurpg/setup-scala@v6
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1.4.3
       with: 
         java-version: 1.11
     - name: setup-docker
