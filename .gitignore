@@ -9,6 +9,7 @@ target/
 .settings
 .springBeans
 /target/
+**/test-output/
 
 ### Maven ###
 *.pmd
